@@ -29,7 +29,11 @@ package "g++" do
   action :install
 end
 
-package "gcj" do
+# package "gcj" do
+#   action :install
+# end
+
+package 'libsac-java-gcj' do
   action :install
 end
 

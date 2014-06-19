@@ -39,7 +39,7 @@ end
 
 execute "Download src" do
   command "cd /tmp; wget #{node.pdftk.uri}"
-  not_if File.exists?("/tmp/#{node.pdftk.source}")
+  not_if "test -f /tmp/#{node.pdftk.source}"
 end
 
 execute "Unzipping archive #{node.pdftk.source}" do

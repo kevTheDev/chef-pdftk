@@ -29,23 +29,22 @@ package "g++" do
   action :install
 end
 
-# package "gcj" do
-#   action :install
-# end
-
 package 'libsac-java-gcj' do
   action :install
 end
 
-remote_file "/tmp/#{node.pdftk.source}" do
-  source node.pdftk.uri
-  mode "0644"
-  not_if do
-      File.exists?("/tmp/#{node.pdftk.source}")
-  end
+package 'gcj-4.6-jdk' do
+  action :install
+end
+
+execute "Download src" do
+  command "cd /tmp; wget #{node.pdftk.uri}"
+  not_if File.exists?("/tmp/#{node.pdftk.source}")
 end
 
 execute "Unzipping archive #{node.pdftk.source}" do
+  
+  
   command "cd /tmp; unzip #{node.pdftk.source}"
   not_if "test -d /tmp/#{node.pdftk.dir}"
 end
